@@ -54,11 +54,11 @@ class Rack(models.Model):
     rack_num=models.IntegerField()
 
 class Book(models.Model):
-    id=models.AutoField(primary_key=True)
+    barcode=models.CharField(primary_key=True,max_length=50)
     name=models.CharField(max_length=50,null=False)
     author=models.CharField(max_length=50,null=False)
     edition=models.CharField(max_length=50,null=False)
-    category=models.ForeignKey(Category,null=False,on_delete=models.CASCADE)
+    category=models.ForeignKey(Category,null=True,blank=True,on_delete=models.CASCADE)
     available=models.BooleanField(null=False)
 
     def __str__(self) -> str:

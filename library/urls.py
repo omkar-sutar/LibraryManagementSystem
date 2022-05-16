@@ -11,4 +11,5 @@ urlpatterns = [
     path('profile', views.viewProfile.as_view(), name='viewProfile'),
     path('resetPassword', views.resetPassword.as_view(), name='resetPassword'),
     path('logout', views.Logout, name='Logout'),
+    path('uploadbarcode', views.uploadBarcode.as_view(),name="uploadBarcode"),
 ]

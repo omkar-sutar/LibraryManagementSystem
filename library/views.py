@@ -1,9 +1,13 @@
 
 from django.contrib.auth.models import User
+from django.http import HttpResponse, HttpResponseBadRequest
 from django.views.generic.base import View
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib.auth.hashers import check_password
+import cv2
+from . import utilities
+from . import models
 
 # Create your views here.
 
@@ -61,6 +65,18 @@ class register(View):
             args["error_message"] = "Passwords Don't Match. Please Try Again."
             return render(request, template_name, args)
 
+class uploadBarcode(View):
+
+    def get(self,request):
+        if not request.user:
+            return render(request,"login.html")
+        img=cv2.imread("library/barcode.jpg")
+        res=utilities.decode(img)
+        #TODO
+        if not res:
+            return HttpResponseBadRequest()
+        book=models.Book.objects.get(barcode=res["data"])
+        return HttpResponse(book)
 
 def Logout(request):
     logout(request)
