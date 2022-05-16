@@ -4,6 +4,7 @@ from django.http import HttpResponse, HttpResponseBadRequest
 from django.views.generic.base import View
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
+from django.core.files.storage import FileSystemStorage
 from django.contrib.auth.hashers import check_password
 import cv2
 from . import utilities
@@ -70,7 +71,15 @@ class uploadBarcode(View):
     def get(self,request):
         if not request.user:
             return render(request,"login.html")
-        img=cv2.imread("library/barcode.jpg")
+        return render(request, 'library/simple_upload.html')
+
+    def post(self,request):
+        if not request.user:
+            return render(request,"login.html")
+        myfile = request.FILES['myfile']
+        fs = FileSystemStorage()
+        filename = fs.save(myfile.name, myfile)
+        img=cv2.imread(filename)
         res=utilities.decode(img)
         #TODO
         if not res:
