@@ -15,5 +15,9 @@ urlpatterns = [
     path('uploadbarcode', views.uploadBarcode.as_view(), name="uploadBarcode"),
     path('search/', views.search, name='search'),
     path('rent/<str:barcode>', views.rent, name='rent'),
+<<<<<<< HEAD
     path('home', views.homePage, name='homePage'),
+=======
+    path('returnbook/<str:barcode>/<str:prn>', views.return_book_superuser, name='returnBook')
+>>>>>>> cec122c72b578b2be20439c12461472900d10311
 ]
