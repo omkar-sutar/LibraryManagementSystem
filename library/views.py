@@ -110,7 +110,7 @@ def return_book_superuser(request, barcode, prn):
 
 class Login(View):
 
-    def get(self, request, template_name='library/loginPage.html'):
+    def get(self, request, template_name='library/login.html'):
         return render(request, template_name)
 
     def post(self, request, template_name='library/loginPage.html'):
