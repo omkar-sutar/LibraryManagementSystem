@@ -23,46 +23,76 @@
             </div>
         </form>
 
-        {% if books %}
-            <table class="table table-info table-striped table-md container hometable">
-                <thead>
-                <tr>
-                    <th scope="col">Book Name</th>
-                    <th scope="col">Get Book</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for book in books %}
-                    <tr>
-                        <td>{{ book.0 }}</td>
-                        {% url "library:rent" barcode=book.1 as the_url %}
-                        <td><a href="{{ the_url }}">Get Book</a></td>
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
+{#        {% if books %}#}
+{#            <table class="table table-info table-striped table-md container hometable">#}
+{#                <thead>#}
+{#                <tr>#}
+{#                    <th scope="col">Book Name</th>#}
+{#                    <th scope="col">Get Book</th>#}
+{#                </tr>#}
+{#                </thead>#}
+{#                <tbody>#}
+{#                {% for book in books %}#}
+{#                    <tr>#}
+{#                        <td>{{ book.0 }}</td>#}
+{#                        {% url "library:rent" barcode=book.1 as the_url %}#}
+{#                        <td><a href="{{ the_url }}">Get Book</a></td>#}
+{#                    </tr>#}
+{#                {% endfor %}#}
+{#                </tbody>#}
+{#            </table>#}
+{#        {% endif %}#}
+
+    </section>
+    <section class="toptrendingbooks container" style="margin: 120px auto; text-align: center">
+        <h3 style="color: #005079; font-weight: bold">Top Trending Books</h3>
+        <br>
+        <table class="table table-info table-striped">
+            <thead>
+            <tr>
+                <th scope="col">Book Name</th>
+                <th scope="col">Get Book</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>Thermodynamics</td>
+                <td><a href="#">Rent</a></td>
+            </tr>
+            <tr>
+                <td>Applied Mathematics</td>
+                <td><a href="#">Rent</a></td>
+            </tr>
+            <tr>
+                <td>Mobile Communication Technology</td>
+                <td><a href="#">Rent</a></td>
+            </tr>
+            <tr>
+                <td>C Programming</td>
+                <td><a href="#">Rent</a></td>
+            </tr>
+            <tr>
+                <td>Data Structures And Algorithm</td>
+                <td><a href="#">Rent</a></td>
+            </tr>
+
+            </tbody>
+        </table>
+
+    </section>
+
+    <section class="file_upload">
+        <h3>Upload QR Code here!</h3>
+        <br>
+        <form method="post" action="{% url 'library:uploadBarcode' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input class="btn btn-info" type="file" name="myfile">
+            <button class="btn btn-dark" type="submit">Upload</button>
+        </form>
+
+        {% if uploaded_file_url %}
+            <p>File uploaded at: <a href="{{ uploaded_file_url }}">{{ uploaded_file_url }}</a></p>
         {% endif %}
-
-        <section class="toptrendingbooks">
-            <h3>Top Trending Books</h3>
-            
-
-        </section>
-
-        <section class="file_upload">
-            <h3>Upload QR Code here!</h3>
-            <br>
-            <form method="post" action="{% url 'library:uploadBarcode' %}" enctype="multipart/form-data">
-                {% csrf_token %}
-                <input class="btn btn-info" type="file" name="myfile">
-                <button class="btn btn-dark" type="submit">Upload</button>
-            </form>
-
-            {% if uploaded_file_url %}
-                <p>File uploaded at: <a href="{{ uploaded_file_url }}">{{ uploaded_file_url }}</a></p>
-            {% endif %}
-        </section>
-
     </section>
 
 {% endblock %}

@@ -598,5 +598,14 @@ footer {
 
 .file_upload{
     position: relative;
-    margin-top: 150px;
+    margin-top: 70px;
+}
+
+.search_head{
+    background-image: url("../../static/library/libraryhome.jpg"); /* The image used */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-size: cover;
+    width: 100%;
+    height: 50vh;
 }
