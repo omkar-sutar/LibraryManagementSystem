@@ -23,25 +23,25 @@
             </div>
         </form>
 
-        {% if books %}
-            <table class="table table-info table-striped table-md container hometable">
-                <thead>
-                <tr>
-                    <th scope="col">Book Name</th>
-                    <th scope="col">Get Book</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for book in books %}
-                    <tr>
-                        <td>{{ book.0 }}</td>
-                        {% url "library:rent" barcode=book.1 as the_url %}
-                        <td><a href="{{ the_url }}">Get Book</a></td>
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
-        {% endif %}
+{#        {% if books %}#}
+{#            <table class="table table-info table-striped table-md container hometable">#}
+{#                <thead>#}
+{#                <tr>#}
+{#                    <th scope="col">Book Name</th>#}
+{#                    <th scope="col">Get Book</th>#}
+{#                </tr>#}
+{#                </thead>#}
+{#                <tbody>#}
+{#                {% for book in books %}#}
+{#                    <tr>#}
+{#                        <td>{{ book.0 }}</td>#}
+{#                        {% url "library:rent" barcode=book.1 as the_url %}#}
+{#                        <td><a href="{{ the_url }}">Get Book</a></td>#}
+{#                    </tr>#}
+{#                {% endfor %}#}
+{#                </tbody>#}
+{#            </table>#}
+{#        {% endif %}#}
 
     </section>
     <section class="toptrendingbooks container" style="margin: 120px auto; text-align: center">
