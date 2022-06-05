@@ -79,7 +79,8 @@
 <main role="main">
     {% if messages %}
         {% for message in messages %}
-            <div style="position: relative;z-index: 10;top:95px" class="alert alert-{{ message.tags }}"> {{ message }} </div>
+            <div style="position: relative;z-index: 10;top:95px"
+                 class="alert alert-{{ message.tags }}"> {{ message }} </div>
         {% endfor %}
     {% endif %}
     {% block content %}
@@ -98,11 +99,9 @@
                              src="{% static 'library/LMSlogo.png' %}"
                              alt="">
 
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab consectetur deserunt dignissimos
-                            enim
-                            eos, esse facilis, laudantium nisi odit omnis qui ut! Corporis ducimus ea eaque esse
-                            nesciunt odit
-                            ut.</p>
+                        <p>WCELMS is a library management system designed by third year students of Walchand College of
+                            Engineering, Sangli of Electronics Department. It is Online interface for swift renting and
+                            availability of books</p>
                     </div>
                 </div>
 
