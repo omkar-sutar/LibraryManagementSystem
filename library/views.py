@@ -31,7 +31,7 @@ def teamPage(request):
 
 @login_required
 def search(request):
-    query=request.GET["booksearch"]
+    query =request.GET["booksearch"]
     allBooks = models.Book.objects.all()
     resultBooks = []
     matchedBooks = dict()

@@ -14,9 +14,8 @@
         <h3>Search Books Now!</h3>
         <form action="{% url 'library:search' %}" method="GET">
             <div class="searchBox">
-
                 <input class="searchInput" type="text" name="booksearch" placeholder="Search">
-                <button class="searchButton" href="#" type="submit">
+                <button class="searchButton"  type="submit">
                     <i class="material-icons">
                         search
                     </i>
@@ -24,6 +23,11 @@
             </div>
         </form>
 
+        {% if books %}
+            {% for book in books %}
+                {{ book.0 }}
+            {% endfor %}
+        {% endif %}
     </section>
 
     {#    <section class="landingloginregister">#}
