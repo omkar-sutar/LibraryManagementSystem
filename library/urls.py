@@ -13,7 +13,6 @@ urlpatterns = [
     path('profile/<str:username>', views.viewProfile.as_view(), name='viewProfile'),
     path('resetPassword', views.resetPassword.as_view(), name='resetPassword'),
     path('logout', views.Logout, name='Logout'),
-    path('uploadbarcode', views.uploadBarcode.as_view(),name="uploadBarcode"),
-    path('search/<str:query>',views.search,name='search'),
-
+    path('uploadbarcode', views.uploadBarcode.as_view(), name="uploadBarcode"),
+    path('search/', views.search, name='search'),
 ]
