@@ -12,17 +12,17 @@
 
     <section class="home_search">
         <h3>Search Books Now!</h3>
+        <form action="{% url 'library:search' %}" method="GET">
+            <div class="searchBox">
 
-        <div class="searchBox">
-            <form action="{% url 'library:search'  %}" method="GET">
-            <input class="searchInput" type="text" name="" placeholder="Search">
-            <button class="searchButton" href="#">
-                <i class="material-icons">
-                    search
-                </i>
-            </button>
-            </form>
-        </div>
+                <input class="searchInput" type="text" name="booksearch" placeholder="Search">
+                <button class="searchButton" href="#">
+                    <i class="material-icons">
+                        search
+                    </i>
+                </button>
+            </div>
+        </form>
 
     </section>
 
