@@ -113,13 +113,14 @@ class Login(View):
     def get(self, request, template_name='library/login.html'):
         return render(request, template_name)
 
-    def post(self, request, template_name='library/loginPage.html'):
+    def post(self, request, template_name='library/login.html'):
         prn = request.POST['prn']
         password = request.POST['password']
 
-        user = authenticate(prn=prn, password=password)
+        user = authenticate(username=prn, password=password)
 
         if user is not None:
+            print(1)
             login(request, user)
             return redirect('/')
         else:

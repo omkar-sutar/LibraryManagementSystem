@@ -61,13 +61,13 @@
                         <li class="nav-iteam">
                             <a class="nav-item nav-link" href="{% url 'library:team' %}">Team</a></li>
                         <li class="nav-iteam">
-                            <a class="nav-item nav-link" href="{% url 'library:Logout' %}">logout</a></li>
+                            <a class="nav-item nav-link" href="{% url 'library:logout' %}">logout</a></li>
 
                     {% else %}
                         <li class="nav-iteam">
                             <a class="nav-item nav-link" href="{% url 'library:team' %}">Team</a></li>
                         <li class="nav-iteam">
-                            <a class="nav-item nav-link" href="{% url 'library:Login' %}">Login</a></li>
+                            <a class="nav-item nav-link" href="{% url 'library:login' %}">Login</a></li>
                         <li class="nav-iteam">
                             <a class="nav-item nav-link" href="{% url 'library:register' %}">Register</a></li>
                     {% endif %}

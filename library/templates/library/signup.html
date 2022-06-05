@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Todolist-Login</title>
+        <title>Todolist-Signup</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta charset="utf-8">
         <link rel="stylesheet" href="{% static 'library/login.css' %}">
@@ -12,7 +12,7 @@
             {%csrf_token%}
             <div class="login-form__content">
                 <div class="login-form__header">Login to your account</div>
-                <input class="login-form__input" type="text" name="prn" placeholder="Username">
+                <input class="login-form__input" type="text" name="username" placeholder="Username">
                 <input class="login-form__input" type="password" name="password" placeholder="Password">
                 {% if error %}
                 <p style="text-align:center">{{error}}</p>
