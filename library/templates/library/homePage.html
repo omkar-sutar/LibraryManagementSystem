@@ -15,7 +15,7 @@
         <form action="{% url 'library:search' %}" method="GET">
             <div class="searchBox">
                 <input class="searchInput" type="text" name="booksearch" placeholder="Search">
-                <button class="searchButton"  type="submit">
+                <button class="searchButton" type="submit">
                     <i class="material-icons">
                         search
                     </i>
@@ -24,10 +24,25 @@
         </form>
 
         {% if books %}
-            {% for book in books %}
-                {{ book.0 }}
-            {% endfor %}
+            <table class="table table-info table-striped container hometable">
+                <thead>
+                <tr>
+                    <th scope="col">Book Name</th>
+                    <th scope="col">Get Book</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for book in books %}
+                    <tr>
+                        <td>{{ book.0 }}</td>
+                        <td><a href="library/rent/{{ book.1 }}">Get Book</a></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
         {% endif %}
+
+
     </section>
 
     {#    <section class="landingloginregister">#}
