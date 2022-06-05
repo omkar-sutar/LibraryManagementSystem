@@ -51,7 +51,7 @@ def search(request):
         resultBooks[:] = resultBooks[:5]
     books = []
     for cnt_book in resultBooks:
-        books.append([str(cnt_book[1]), cnt_book[1].barcode])
+        books.append([str(cnt_book[1]).rsplit(' ')[0], cnt_book[1].barcode])
     print(books)
     return render(request, 'library/homePage.html', {"books": books})
 
