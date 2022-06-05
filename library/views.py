@@ -21,8 +21,9 @@ def landingpage(request):
     return render(request, 'library/landingPage.html')
 
 
-@login_required
-def homePage(request,books=None):
+# @login_required
+def homePage(request):
+    print('abc')
     return render(request, 'library/homePage.html')
 
 
@@ -56,7 +57,7 @@ def search(request):
     for cnt_book in resultBooks:
         books.append([str(cnt_book[1]).rsplit(' ')[0], cnt_book[1].barcode])
     print(books)
-    return redirect('library:homePage', books)
+    return render(request, 'library/homePage.html', {"books": books})
 
 
 # @login_required
