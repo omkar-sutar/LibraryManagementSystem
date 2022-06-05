@@ -20,8 +20,6 @@ def landingpage(request):
     return render(request, 'library/landingPage.html')
 
 
-def homePage(request):
-    return render(request, 'library/homePage.html')
 # @login_required
 def homePage(request):
     print('abc')
