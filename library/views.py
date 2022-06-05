@@ -28,10 +28,12 @@ def homePage(request,books=None):
 def teamPage(request):
     return render(request, 'library/teamPage.html')
 
+
 @login_required
 def search(request):
-    query =request.GET["booksearch"]
+    query = request.GET["booksearch"]
     allBooks = models.Book.objects.all()
+    print(allBooks," all books")
     resultBooks = []
     matchedBooks = dict()
     for book in allBooks:
@@ -40,12 +42,13 @@ def search(request):
         cnt = 0
         query_words = query.split(' ')
         for word in query_words:
-            if word in book.name.lower():
+            if word.lower() in book.name.lower():
                 cnt += 1
         if book.name not in matchedBooks:
             resultBooks.append([cnt, book])
             matchedBooks[book.name] = 1
     resultBooks = sorted(resultBooks, key=lambda cnt_book: -cnt_book[0])
+    print(resultBooks)
     if len(resultBooks) > 5:
         resultBooks[:] = resultBooks[:5]
     books = []
@@ -53,6 +56,7 @@ def search(request):
         books.append([str(cnt_book[1]).rsplit(' ')[0], cnt_book[1].barcode])
     print(books)
     return redirect('library:homePage', books)
+
 
 # @login_required
 def rent(request, barcode):
@@ -143,7 +147,7 @@ class Register(View):
                 args["error_message"] = "Email Already Exists. Please Try Again."
                 return render(request, template_name, args)
             else:
-                user=User.objects.create_user()
+                user = User.objects.create_user()
                 return redirect('Login')
 
         else:
@@ -169,7 +173,7 @@ class uploadBarcode(View):
         # TODO
         if not res:
             return HttpResponseBadRequest()
-        barcode=res["data"]
+        barcode = res["data"]
         return redirect(f"rent/{barcode}")
 
 
