@@ -14,13 +14,17 @@
         <div class="container" style="text-align: left">
             <div class="row justify-content-md-center">
                 <div class="col-md-4 col-12 landing_login_col">
-                    <button class="button-63" role="button">Login Now!</button>
+                    <a href="{% url 'library:login' %}">
+                        <button class="button-63" role="button">Login Now!</button>
+                    </a>
                     <hr>
                     <p>Login Now to use WCELMS! <br>
                         Best in class Library Management System</p>
                 </div>
                 <div class="col-md-4 col-12 landing_register_col">
-                    <button class="button-64" role="button">Register!</button>
+                    <a href="{% url 'library:signup' %}">
+                        <button class="button-64" role="button">Register!</button>
+                    </a>
                     <hr>
                     <p>Register to use WCELMS! <br>
                         To experience smooth and easy library Rental and returns</p>

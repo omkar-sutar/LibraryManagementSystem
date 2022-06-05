@@ -15,7 +15,7 @@ p {
 
 /* FOOTER */
 footer {
-    background-color: #005079;
+    background-color: #216bac;
 }
 
 .footer_div {
@@ -105,13 +105,13 @@ footer {
 
 .landing_head_text h1 {
     font-size: 80px;
-    text-shadow: 0 0 25px #005079, 0 0 25px #005079;
+    text-shadow: 0 0 25px #216bac, 0 0 25px #216bac;
     font-family: 'Courgette', cursive;
 }
 
 .landing_head_text h3 {
     font-size: 15px;
-    color: #005079;
+    color: #216bac;
 }
 
 .landingloginregister {
@@ -217,7 +217,7 @@ footer {
 .landing_features h1 {
     text-align: center;
     font-weight: bold;
-    color: #005079;
+    color: #216bac;
 }
 
 .landing_features_cols {
@@ -233,7 +233,7 @@ footer {
 
 .landing_features .container h2 {
     font-weight: bold;
-    color: #005079;
+    color: #216bac;
 }
 
 .landing_features .container p {
@@ -273,7 +273,7 @@ p {
 
 /* FOOTER */
 footer {
-    background-color: #005079;
+    background-color: #216bac;
 }
 
 .footer_div {
@@ -363,13 +363,13 @@ footer {
 
 .landing_head_text h1 {
     font-size: 80px;
-    text-shadow: 0 0 25px #005079, 0 0 25px #005079;
+    text-shadow: 0 0 25px #216bac, 0 0 25px #216bac;
     font-family: 'Courgette', cursive;
 }
 
 .landing_head_text h3 {
     font-size: 15px;
-    color: #005079;
+    color: #216bac;
 }
 
 .landingloginregister {
@@ -475,7 +475,7 @@ footer {
 .landing_features h1 {
     text-align: center;
     font-weight: bold;
-    color: #005079;
+    color: #216bac;
 }
 
 .landing_features_cols {
@@ -491,7 +491,7 @@ footer {
 
 .landing_features .container h2 {
     font-weight: bold;
-    color: #005079;
+    color: #216bac;
 }
 
 .landing_features .container p {
@@ -585,7 +585,7 @@ footer {
 .home_search h3 {
     font-weight: bold;
     font-size: 1.5rem;
-    color: #005079;
+    color: #216bac;
 }
 
 .home_search .searchBox {
@@ -625,7 +625,7 @@ footer {
 .profileimage img {
     width: 50%;
     border-radius: 100%;
-    border: 2px solid #005079;
+    border: 2px solid #216bac;
 }
 
 .profiile_user_data {
@@ -636,7 +636,7 @@ footer {
 
     font-size: 2.5rem;
     font-weight: bolder;
-    color: #005079;
+    color: #216bac;
 }
 
 .profile_rental_table {
@@ -650,7 +650,7 @@ footer {
 
 .active_books h2 {
     font-weight: bolder;
-    color: #005079;
+    color: #216bac;
 }
 
 .profiile_user_data h4{

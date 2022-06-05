@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700&display=swap');
 
 body {
-    background: #009578;
+    background: #216bac;
     margin: 15px;
     margin-top: 50px;
 }
@@ -54,7 +54,7 @@ body {
 }
 
 .login-form__input:focus {
-    border-color: #009578;
+    border-color: #216bac;
 }
 
 .login-form__input::placeholder {
@@ -65,7 +65,7 @@ body {
     padding: 10px;
     color: #ffffff;
     font-weight: bold;
-    background: #009578;
+    background: #216bac;
     width: 100%;
     border: none;
     outline: none;
@@ -74,7 +74,7 @@ body {
 }
 
 .login-form__button:active {
-    background: #008067;
+    background: #216bac;
 }
 
 .login-form__links {
@@ -84,6 +84,6 @@ body {
 
 .login-form__link {
     font-size: 0.9em;
-    color: #008067;
+    color: #216bac;
     text-decoration: none;
 }
