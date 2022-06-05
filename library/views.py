@@ -110,16 +110,17 @@ def return_book_superuser(request, barcode, prn):
 
 class Login(View):
 
-    def get(self, request, template_name='library/loginPage.html'):
+    def get(self, request, template_name='library/login.html'):
         return render(request, template_name)
 
-    def post(self, request, template_name='library/loginPage.html'):
+    def post(self, request, template_name='library/login.html'):
         prn = request.POST['prn']
         password = request.POST['password']
 
-        user = authenticate(prn=prn, password=password)
+        user = authenticate(username=prn, password=password)
 
         if user is not None:
+            print(1)
             login(request, user)
             return redirect('/')
         else:
@@ -187,11 +188,21 @@ def Logout(request):
 
 
 class viewProfile(View):
-    def get(self, request, template_name="viewProfile.html"):
+    def get(self, request, username, template_name="library/profile.html"):
         if request.user:
-            return render(request, template_name)
+            member = models.Member.objects.filter(user=request.user)
+            books = models.Active_Rented_Books.objects.filter(member=request.user.member)
+            fine = models.Fine.objects.get(member=request.user.member)
+            bookhistory = models.Rental_History.objects.filter(member=request.user.member).order_by('-date')
+            parameters = {
+                'member': member,
+                "books": books,
+                "fine": fine,
+                "bookhistory": bookhistory
+            }
+            return render(request, template_name, parameters)
         else:
-            return render(request, "login.html")
+            redirect('library:login')
 
 
 # Change password

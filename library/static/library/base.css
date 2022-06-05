@@ -577,12 +577,12 @@ footer {
     }
 }
 
-.home_search{
+.home_search {
     text-align: center;
     margin: 50px 0;
 }
 
-.home_search h3{
+.home_search h3 {
     font-weight: bold;
     font-size: 1.5rem;
     color: #005079;
@@ -592,18 +592,18 @@ footer {
     margin-top: 70px;
 }
 
-.hometable{
+.hometable {
     margin-top: 90px;
 }
 
-.file_upload{
+.file_upload {
     position: relative;
     margin-top: 70px;
 }
 
 /* Search Page */
 
-.search_head{
+.search_head {
     background-image: url("../../static/library/libsearch.jpg"); /* The image used */
     background-position: center; /* Center the image */
     background-repeat: no-repeat; /* Do not repeat the image */
@@ -613,15 +613,46 @@ footer {
 }
 
 /* Profile Page */
-.profile_top{
-    margin-top: 100px;
+.profile_top {
+    margin-top: 150px;
 }
 
-.profile_top .profileimage{
-    margin: 20px;
+.profile_top .profileimage {
+    margin: 50px 20px;
+    text-align: center;
 }
 
-.profileimage{
-    width: 70%;
+.profileimage img {
+    width: 50%;
+    border-radius: 100%;
+    border: 2px solid #005079;
 }
 
+.profiile_user_data {
+    text-align: left;
+}
+
+.profiile_user_data h2 {
+
+    font-size: 2.5rem;
+    font-weight: bolder;
+    color: #005079;
+}
+
+.profile_rental_table {
+    margin: 30px auto;
+}
+
+.active_books {
+    text-align: center;
+    margin: 50px auto;
+}
+
+.active_books h2 {
+    font-weight: bolder;
+    color: #005079;
+}
+
+.profiile_user_data h4{
+    color: #f13f3f;
+}
