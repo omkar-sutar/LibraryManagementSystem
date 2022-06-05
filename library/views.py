@@ -12,6 +12,7 @@ import cv2
 from . import utilities
 from . import models
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 
 # Create your views here.
@@ -34,7 +35,7 @@ def teamPage(request):
 def search(request):
     query = request.GET["booksearch"]
     allBooks = models.Book.objects.all()
-    print(allBooks," all books")
+    print(allBooks, " all books")
     resultBooks = []
     matchedBooks = dict()
     for book in allBooks:
@@ -75,7 +76,8 @@ def rent(request, barcode):
     rented_book = models.Rental_History(book=book, member=member, status=status,
                                         expected_return_date=expected_return_date)
     rented_book.save()
-    return HttpResponse(member.first_name)
+    messages.success(request, f"Book Rented Successfully!")
+    return redirect('library:homePage')
 
 
 @login_required
@@ -157,7 +159,6 @@ class Register(View):
 
 
 class uploadBarcode(View):
-
     def get(self, request):
         if not request.user:
             return redirect('Login')
@@ -167,6 +168,7 @@ class uploadBarcode(View):
         if not request.user:
             return redirect('Login')
         myfile = request.FILES['myfile']
+        print(1)
         fs = FileSystemStorage()
         filename = fs.save(myfile.name, myfile)
         img = cv2.imread(filename)
@@ -175,7 +177,8 @@ class uploadBarcode(View):
         if not res:
             return HttpResponseBadRequest()
         barcode = res["data"]
-        return redirect(f"rent/{barcode}")
+        messages.success(request, f"Book Rented Successfully!")
+        return redirect('library:rent', barcode)
 
 
 def Logout(request):
