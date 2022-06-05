@@ -1,4 +1,3 @@
-
 from django.contrib.auth.models import User
 from django.http import HttpResponse, HttpResponseBadRequest
 from django.views.generic.base import View
@@ -9,6 +8,8 @@ from django.contrib.auth.hashers import check_password
 import cv2
 from . import utilities
 from . import models
+from django.contrib.auth.decorators import login_required
+
 
 # Create your views here.
 
@@ -16,6 +17,15 @@ class landingPage(View):
 
     def get(self, request, template_name='landingPage.html'):
         return render(request, template_name)
+
+
+@login_required
+def homePage(request):
+    return render(request, 'library/homePage.html')
+
+
+def teamPage(request):
+    return render(request, 'library/teamPage.html')
 
 
 class Login(View):
@@ -66,30 +76,33 @@ class register(View):
             args["error_message"] = "Passwords Don't Match. Please Try Again."
             return render(request, template_name, args)
 
+
 class uploadBarcode(View):
 
-    def get(self,request):
+    def get(self, request):
         if not request.user:
-            return render(request,"login.html")
+            return redirect('Login')
         return render(request, 'library/simple_upload.html')
 
-    def post(self,request):
+    def post(self, request):
         if not request.user:
-            return render(request,"login.html")
+            return redirect('Login')
         myfile = request.FILES['myfile']
         fs = FileSystemStorage()
         filename = fs.save(myfile.name, myfile)
-        img=cv2.imread(filename)
-        res=utilities.decode(img)
-        #TODO
+        img = cv2.imread(filename)
+        res = utilities.decode(img)
+        # TODO
         if not res:
             return HttpResponseBadRequest()
-        book=models.Book.objects.get(barcode=res["data"])
+        book = models.Book.objects.get(barcode=res["data"])
         return HttpResponse(book)
+
 
 def Logout(request):
     logout(request)
     return redirect('/')
+
 
 class viewProfile(View):
     def get(self, request, template_name="viewProfile.html"):
@@ -97,6 +110,7 @@ class viewProfile(View):
             return render(request, template_name)
         else:
             return render(request, "login.html")
+
 
 # Change password
 class resetPassword(View):
@@ -130,6 +144,6 @@ class resetPassword(View):
         U.save()
         update_session_auth_hash(request, U)
         err = {}
-        
+
         err["error_message"] = "Password changed successfully."
         return render(request, 'viewProfile.html')
