@@ -16,88 +16,92 @@ from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
-class landingPage(View):
-
-    def get(self, request, template_name='landingPage.html'):
-        return render(request, template_name)
+def landingpage(request):
+    return render(request, 'library/landingPage.html')
 
 
-@login_required
 def homePage(request):
+    return render(request, 'library/homePage.html')
+# @login_required
+def homePage(request):
+    print('abc')
     return render(request, 'library/homePage.html')
 
 
 def teamPage(request):
     return render(request, 'library/teamPage.html')
 
-@login_required
-def search(request,query):
-    allBooks=models.Book.objects.all()
-    resultBooks=[]
-    matchedBooks=dict()
+# @login_required
+def search(request, query):
+    allBooks = models.Book.objects.all()
+    resultBooks = []
+    matchedBooks = dict()
     for book in allBooks:
-        if book.available==False:
+        if book.available == False:
             continue
-        cnt=0
-        query_words=query.split(' ')
+        cnt = 0
+        query_words = query.split(' ')
         for word in query_words:
             if word in book.name.lower():
-                cnt+=1
+                cnt += 1
         if book.name not in matchedBooks:
-            resultBooks.append([cnt,book])
-            matchedBooks[book.name]=1
-    resultBooks=sorted(resultBooks,key=lambda cnt_book: -cnt_book[0])
-    if len(resultBooks)>5:  
-        resultBooks[:]=resultBooks[:5]
-    books=[]
+            resultBooks.append([cnt, book])
+            matchedBooks[book.name] = 1
+    resultBooks = sorted(resultBooks, key=lambda cnt_book: -cnt_book[0])
+    if len(resultBooks) > 5:
+        resultBooks[:] = resultBooks[:5]
+    books = []
     for cnt_book in resultBooks:
-        books.append([str(cnt_book[1]),cnt_book[1].barcode])
+        books.append([str(cnt_book[1]), cnt_book[1].barcode])
     print(books)
-    return render(request,'library/homePage.html',{"books":books})
+    return render(request, 'library/homePage.html', {"books": books})
 
-@login_required
-def rent(request,barcode):
-    book=models.Book.objects.get(barcode=barcode)
-    #mark book as unavailable
-    book.available=False
+# @login_required
+def rent(request, barcode):
+    book = models.Book.objects.get(barcode=barcode)
+    # mark book as unavailable
+    book.available = False
     book.save()
-    #add book in active_rented_books, rental_history 
-    member=models.Member.objects.get(user=request.user)
-    status=1
-    expected_return_date=timezone.now()+timedelta(7)
-    active_rented_book=models.Active_Rented_Books(book=book,member=member,status=status,expected_return_date=expected_return_date)
-    active_rented_book.save() 
-    rented_book=models.Rental_History(book=book,member=member,status=status,expected_return_date=expected_return_date)
+    # add book in active_rented_books, rental_history
+    member = models.Member.objects.get(user=request.user)
+    status = 1
+    expected_return_date = timezone.now() + timedelta(7)
+    active_rented_book = models.Active_Rented_Books(book=book, member=member, status=status,
+                                                    expected_return_date=expected_return_date)
+    active_rented_book.save()
+    rented_book = models.Rental_History(book=book, member=member, status=status,
+                                        expected_return_date=expected_return_date)
     rented_book.save()
     return HttpResponse(member.first_name)
 
+
 @login_required
-def return_book_superuser(request,barcode,prn):
-    if request.user.is_superuser==False:
+def return_book_superuser(request, barcode, prn):
+    if request.user.is_superuser == False:
         return HttpResponse("Unauthorized access: Please continue with superuser account")
-    book=models.Book.objects.get(barcode=barcode)
-    rented_book=models.Active_Rented_Books.objects.get(book=book)
-    member=models.Member.objects.get(prn=prn)
-    #check for late return
-    if rented_book.expected_return_date<timezone.now():
-        #get original cost
-        fine_l=models.Fine.objects.filter(member=member)
-        if len(fine_l)==0:
-            fine=models.Fine(member=member,amount=50)
+    book = models.Book.objects.get(barcode=barcode)
+    rented_book = models.Active_Rented_Books.objects.get(book=book)
+    member = models.Member.objects.get(prn=prn)
+    # check for late return
+    if rented_book.expected_return_date < timezone.now():
+        # get original cost
+        fine_l = models.Fine.objects.filter(member=member)
+        if len(fine_l) == 0:
+            fine = models.Fine(member=member, amount=50)
             fine.save()
         else:
-            fine=fine_l[0]
-            fine.amount+=50
+            fine = fine_l[0]
+            fine.amount += 50
             fine.save()
-    book.available=True
+    book.available = True
     book.save()
     rented_book.delete()
-    rent_history=models.Rental_History.objects.get(book=book,status=1)
-    rent_history.status=0
-    rent_history.return_date=timezone.now()
+    rent_history = models.Rental_History.objects.get(book=book, status=1)
+    rent_history.status = 0
+    rent_history.return_date = timezone.now()
     rent_history.save()
     return HttpResponse("Done")
-    
+
 
 class Login(View):
 
