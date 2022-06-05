@@ -8,16 +8,21 @@
         <link rel="stylesheet" href="{% static 'library/login.css' %}">
     </head>
     <body>
-        <form class="login-form" action="{% url 'library:login' %}" method="POST">
+        <form class="login-form" action="{% url 'library:signup' %}" method="POST">
             {%csrf_token%}
             <div class="login-form__content">
                 <div class="login-form__header">Login to your account</div>
                 <input class="login-form__input" type="text" name="username" placeholder="Username">
                 <input class="login-form__input" type="password" name="password" placeholder="Password">
+                <input class="login-form__input" type="text" name="firstname" placeholder="First Name">
+                <input class="login-form__input" type="text" name="lastname" placeholder="Last Name">
+                <input class="login-form__input" type="email" name="email" placeholder="Email ID">
+                <input class="login-form__input" type="text" name="prn" placeholder="PRN">
+                
                 {% if error %}
                 <p style="text-align:center">{{error}}</p>
                 {%endif%}
-                <button class="login-form__button" type="submit">Login</button>
+                <button class="login-form__button" type="submit">Signup</button>
                 <div class="login-form__links">
                     
                 </div>

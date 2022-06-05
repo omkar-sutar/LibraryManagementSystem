@@ -131,28 +131,33 @@ class Login(View):
 
 class Register(View):
 
-    def get(self, request, template_name='register.html'):
+    def get(self, request, template_name='library/signup.html'):
         return render(request, template_name)
 
-    def post(self, request, template_name='register.html'):
-        first_name = request.POST['first_name']
-        last_name = request.POST['last_name']
+    def post(self, request, template_name='library/signup.html'):
+        username=request.POST['username']
+        first_name = request.POST['firstname']
+        last_name = request.POST['lastname']
         prn = request.POST['prn']
-        password1 = request.POST['password1']
-        password2 = request.POST['password2']
+        password1 = request.POST['password']
+        password2=password1
         email = request.POST['email']
         args = {}
 
         if password1 == password2:
-            if User.objects.filter(prn=prn).exists():
-                args["error_message"] = "PRN Already Exists. Please Try Again."
-                return render(request, template_name, args)
-            elif User.objects.filter(email=email).exists():
+            if User.objects.filter(email=email).exists():
                 args["error_message"] = "Email Already Exists. Please Try Again."
                 return render(request, template_name, args)
+            elif User.objects.filter(username=username).exists():
+                args["error_message"] = "Username Already Exists. Please Try Again."
+                return render(request, template_name, args)
             else:
-                user = User.objects.create_user()
-                return redirect('Login')
+                user = User.objects.create_user(username=username,password=password1,email=email)
+                user.save()
+                member=models.Member(user=user,email=email,
+                                    prn=prn,first_name=first_name,last_name=last_name)
+                member.save()
+                return redirect('library:login')
 
         else:
             args["error_message"] = "Passwords Don't Match. Please Try Again."
