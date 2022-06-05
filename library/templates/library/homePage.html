@@ -12,17 +12,36 @@
 
     <section class="home_search">
         <h3>Search Books Now!</h3>
+        <form action="{% url 'library:search' %}" method="GET">
+            <div class="searchBox">
+                <input class="searchInput" type="text" name="booksearch" placeholder="Search">
+                <button class="searchButton" type="submit">
+                    <i class="material-icons">
+                        search
+                    </i>
+                </button>
+            </div>
+        </form>
 
-        <div class="searchBox">
-            <form action="{% url 'library:search'  %}" method="GET">
-            <input class="searchInput" type="text" name="" placeholder="Search">
-            <button class="searchButton" href="#">
-                <i class="material-icons">
-                    search
-                </i>
-            </button>
-            </form>
-        </div>
+        {% if books %}
+            <table class="table table-info table-striped container hometable">
+                <thead>
+                <tr>
+                    <th scope="col">Book Name</th>
+                    <th scope="col">Get Book</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for book in books %}
+                    <tr>
+                        <td>{{ book.0 }}</td>
+                        <td><a href="library/rent/{{ book.1 }}">Get Book</a></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+
 
     </section>
 
