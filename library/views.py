@@ -101,10 +101,10 @@ def return_book_superuser(request,barcode,prn):
 
 class Login(View):
 
-    def get(self, request, template_name='login.html'):
+    def get(self, request, template_name='library/loginPage.html'):
         return render(request, template_name)
 
-    def post(self, request, template_name='login.html'):
+    def post(self, request, template_name='library/loginPage.html'):
         prn = request.POST['prn']
         password = request.POST['password']
 
@@ -166,8 +166,8 @@ class uploadBarcode(View):
         # TODO
         if not res:
             return HttpResponseBadRequest()
-        book = models.Book.objects.get(barcode=res["data"])
-        return HttpResponse(book)
+        barcode=res["data"]
+        return redirect(f"rent/{barcode}")
 
 
 def Logout(request):

@@ -68,8 +68,8 @@ class Rental_History(models.Model):
     book=models.ForeignKey(Book,on_delete=models.CASCADE)
     member=models.ForeignKey(Member,on_delete=models.DO_NOTHING)
     status=models.IntegerField(null=False)
-    date=models.DateTimeField(auto_now_add=True)
     return_date=models.DateTimeField(auto_now_add=False,null=True)
+    date=models.DateTimeField(auto_now_add=True)
     expected_return_date=models.DateTimeField(null=False)
 
 class Active_Rented_Books(models.Model):
