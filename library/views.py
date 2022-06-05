@@ -123,7 +123,7 @@ class Login(View):
             return render(request, template_name, args)
 
 
-class register(View):
+class Register(View):
 
     def get(self, request, template_name='register.html'):
         return render(request, template_name)
