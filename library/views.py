@@ -21,7 +21,7 @@ def landingpage(request):
 
 
 @login_required
-def homePage(request):
+def homePage(request,books=None):
     return render(request, 'library/homePage.html')
 
 
@@ -52,7 +52,7 @@ def search(request):
     for cnt_book in resultBooks:
         books.append([str(cnt_book[1]).rsplit(' ')[0], cnt_book[1].barcode])
     print(books)
-    return redirect(homePage, {"books": books})
+    return redirect('library:homePage', books)
 
 # @login_required
 def rent(request, barcode):
