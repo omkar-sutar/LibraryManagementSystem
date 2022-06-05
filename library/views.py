@@ -29,8 +29,9 @@ def homePage(request):
 def teamPage(request):
     return render(request, 'library/teamPage.html')
 
-# @login_required
-def search(request, query):
+@login_required
+def search(request):
+    query=request.GET["booksearch"]
     allBooks = models.Book.objects.all()
     resultBooks = []
     matchedBooks = dict()
@@ -143,6 +144,7 @@ class Register(View):
                 args["error_message"] = "Email Already Exists. Please Try Again."
                 return render(request, template_name, args)
             else:
+                user=User.objects.create_user()
                 return redirect('Login')
 
         else:
