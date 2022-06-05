@@ -15,5 +15,5 @@ urlpatterns = [
     path('logout', views.Logout, name='Logout'),
     path('uploadbarcode', views.uploadBarcode.as_view(), name="uploadBarcode"),
     path('search/', views.search, name='search'),
-    path('rent/<str:barcode>', views.rent, name='rent')
+    path('rent/<str:barcode>', views.rent, name='rent'),
 ]
