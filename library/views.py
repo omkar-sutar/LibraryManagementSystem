@@ -142,6 +142,7 @@ class Register(View):
         password1 = request.POST['password']
         password2=password1
         email = request.POST['email']
+        print(email)
         args = {}
 
         if password1 == password2:
@@ -154,9 +155,11 @@ class Register(View):
             else:
                 user = User.objects.create_user(username=username,password=password1,email=email)
                 user.save()
+                print(user)
                 member=models.Member(user=user,email=email,
                                     prn=prn,first_name=first_name,last_name=last_name)
                 member.save()
+                print(member)
                 return redirect('library:login')
 
         else:
